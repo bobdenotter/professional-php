@@ -13,16 +13,10 @@ $request = Request::createFromGlobals();
 
 $dispatcher = \FastRoute\simpleDispatcher(
     function (\FastRoute\RouteCollector $r) {
-        $r->addRoute(
-            'GET',
-            '/',
-            'SocialNews\FrontPage\Presentation\FrontPageController#show'
-        );
-        $r->addRoute(
-            'GET',
-            '/submit',
-            'SocialNews\Submission\Presentation\SubmissionController#show'
-        );
+        $routes = include(ROOT_DIR . '/src/Routes.php');
+        foreach ($routes as $route) {
+            $r->addRoute(...$route);
+        }
     }
 );
 
@@ -47,7 +41,8 @@ switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::FOUND:
         [$controllerName, $method] = explode('#', $routeInfo[1]);
         $vars = $routeInfo[2];
-        $controller = new $controllerName;
+        $injector = include('Dependencies.php');
+        $controller = $injector->make($controllerName);
         $response = $controller->$method($request, $vars);
         break;
 }
