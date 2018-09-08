@@ -1,0 +1,13 @@
+{
+    "require": {
+        "php": "~7.2.0",
+        "symfony/http-foundation": "^4.1",
+        "symfony/debug": "^4.1",
+        "symfony/web-profiler-bundle": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "SocialNews\\": "src/"
+        }
+    }
+}
