@@ -1,8 +1,7 @@
-<?php declare(strict_types=1);
-
+<?php declare (strict_types = 1);
 namespace SocialNews\User\Application;
 
-final class RegisterUser
+final class LogIn
 {
     private $nickname;
     private $password;
@@ -13,12 +12,12 @@ final class RegisterUser
         $this->password = $password;
     }
 
-    public function getNickname(): string
+    public function getNickname() : string
     {
         return $this->nickname;
     }
 
-    public function getPassword(): string
+    public function getPassword() : string
     {
         return $this->password;
     }

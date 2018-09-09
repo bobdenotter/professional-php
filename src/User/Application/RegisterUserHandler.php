@@ -1,4 +1,4 @@
-<?php declare (strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace SocialNews\User\Application;
 
@@ -13,9 +13,13 @@ final class RegisterUserHandler
     {
         $this->userRepository = $userRepository;
     }
-    public function handle(RegisterUser $command) : void
+
+    public function handle(RegisterUser $command): void
     {
-        $user = User::register($command->getNickname(), $command->getPassword());
+        $user = User::register(
+            $command->getNickname(),
+            $command->getPassword()
+        );
         $this->userRepository->add($user);
     }
 }

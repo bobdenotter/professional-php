@@ -1,6 +1,10 @@
 {% extends 'Layout.html.twig' %}
 
 {% block content %}
+{% include 'FlashMessages.html.twig' %}
+
+<h2>Home</h2>
+
 <ol>
     {% for submission in submissions %}
     <li>
