@@ -12,9 +12,11 @@ final class Submission
     private $url;
     private $title;
     private $creationDate;
+    private $authorId;
 
     private function __construct(
         UuidInterface $id,
+        AuthorId $authorId,
         string $url,
         string $title,
         DateTimeImmutable $creationDate
@@ -23,6 +25,7 @@ final class Submission
         $this->url = $url;
         $this->title = $title;
         $this->creationDate = $creationDate;
+        $this->authorId = $authorId;
     }
 
     public function getId() : UuidInterface
@@ -45,15 +48,24 @@ final class Submission
         return $this->creationDate;
     }
 
-    public static function submit(string $url, string $title) : Submission
-    {
+    public static function submit(
+        UuidInterface $authorId,
+        string $url,
+        string $title
+    ): Submission {
         return new Submission(
             Uuid::uuid4(),
+            AuthorId::fromUuid($authorId),
             $url,
             $title,
             new DateTimeImmutable()
         );
     }
 
+
+    public function getAuthorId() : AuthorId
+    {
+        return $this->authorId;
+    }
 
 }
